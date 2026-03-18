@@ -431,76 +431,235 @@
     }
 
     /* ========================================
-       ADVANTAGES — MASONRY
+       ADVANTAGES — NARRATIVE STEPS
        ======================================== */
     .advantages {
       background: var(--light-tint);
-      padding: 80px 0;
-    }
-
-    .advantages .container {
-      overflow: visible;
+      padding: 90px 0;
     }
 
     .advantages-header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 64px;
     }
 
-    .adv-masonry {
-      max-width: 1000px;
+    .why-steps {
+      max-width: 960px;
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .why-step {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 88px 1fr;
       gap: 32px;
+      align-items: start;
     }
 
-    .adv-masonry-card {
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
-      overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .adv-masonry-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .adv-masonry-card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-    }
-
-    .adv-masonry-card--tall img {
-      height: 280px;
-    }
-
-    .adv-masonry-body {
-      padding: 32px;
-    }
-
-    .adv-masonry-body h4 {
+    .why-step-number {
+      width: 88px;
+      height: 88px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-family: var(--font-heading);
+      font-size: 2rem;
       font-weight: 700;
-      font-size: 1.3rem;
+      flex-shrink: 0;
+      box-shadow: 0 8px 24px rgba(98,55,160,0.3);
+    }
+
+    .why-step-content {
+      background: var(--white);
+      padding: 40px 44px;
+      border-radius: 20px;
+      box-shadow: 0 4px 24px rgba(98,55,160,0.08);
+      border-left: 5px solid var(--primary);
+    }
+
+    .why-step-content h3 {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .why-quote {
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--text-dark);
+      line-height: 1.7;
+      padding-left: 20px;
+      border-left: 3px solid var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .why-stat {
+      background: var(--light-tint);
+      padding: 18px 24px;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-top: 16px;
+    }
+
+    /* Comparison table */
+    .why-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 8px;
+      font-size: 0.97rem;
+    }
+
+    .why-table th {
+      background: var(--primary);
+      color: white;
+      padding: 16px 20px;
+      text-align: left;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .why-table th.ph-col {
+      background: var(--accent);
+    }
+
+    .why-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid #eee;
+      color: var(--text-mid);
+      vertical-align: top;
+    }
+
+    .why-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .why-table td.ph-col {
+      background: var(--light-tint);
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* Process steps */
+    .why-process {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 12px;
+    }
+
+    .why-process-step {
+      background: var(--light-tint);
+      padding: 28px 24px;
+      border-radius: 14px;
+      text-align: center;
+    }
+
+    .why-process-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin: 0 auto 16px;
+    }
+
+    .why-process-step h4 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
       color: var(--primary);
       margin-bottom: 10px;
     }
 
-    .adv-masonry-body p {
-      font-size: 1.05rem;
+    .why-process-step p {
+      font-size: 0.95rem;
       color: var(--text-mid);
-      line-height: 1.7;
+      line-height: 1.6;
     }
 
-    .adv-masonry-card--span {
-      grid-column: 1 / -1;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+    /* Outcome card */
+    .why-outcome {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      border-radius: 16px;
+      padding: 36px 40px;
+      margin-top: 12px;
+      color: white;
+    }
+
+    .why-outcome-quote {
+      font-size: 1.1rem;
+      font-style: italic;
+      line-height: 1.75;
+      padding-left: 20px;
+      border-left: 3px solid rgba(255,255,255,0.5);
+      margin-bottom: 10px;
+    }
+
+    .why-outcome-attr {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-bottom: 32px;
+    }
+
+    .why-timeline {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin-top: 8px;
+    }
+
+    .why-timeline::before {
+      content: '';
+      position: absolute;
+      top: 30px;
+      left: 0; right: 0;
+      height: 2px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    .why-timeline-point {
+      text-align: center;
+      flex: 1;
+      position: relative;
+    }
+
+    .why-timeline-dot {
+      width: 60px;
+      height: 60px;
+      background: white;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: var(--primary);
+      position: relative;
+      z-index: 1;
+      line-height: 1.2;
+    }
+
+    .why-timeline-label {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      line-height: 1.4;
     }
 
     /* ========================================
@@ -1722,8 +1881,44 @@
         font-size: clamp(2.2rem, 7vw, 3.5rem);
       }
 
-      .adv-masonry {
+      .why-step {
+        grid-template-columns: 64px 1fr;
+        gap: 20px;
+      }
+
+      .why-step-number {
+        width: 64px;
+        height: 64px;
+        font-size: 1.5rem;
+      }
+
+      .why-step-content {
+        padding: 28px 24px;
+      }
+
+      .why-process {
         grid-template-columns: 1fr;
+      }
+
+      .why-table {
+        font-size: 0.85rem;
+      }
+
+      .why-table th, .why-table td {
+        padding: 12px 14px;
+      }
+
+      .why-timeline {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .why-timeline::before {
+        display: none;
+      }
+
+      .why-timeline-dot {
+        margin: 0 auto 8px;
       }
 
       .platform-card {
@@ -1978,53 +2173,132 @@
   </section>
 
   <!-- ======================================
-       KEY ADVANTAGES — MASONRY
+       KEY ADVANTAGES — NARRATIVE STEPS
        ====================================== -->
   <section class="advantages" id="advantages">
     <div class="container">
       <div class="advantages-header fade-in">
         <span class="section-label">Key Advantages</span>
-        <h2 class="section-title">Why Person Health</h2>
+        <h2 class="section-title">Why Person Health Works</h2>
+        <p class="section-subtitle" style="margin:0 auto;">A complete picture — from the challenge we solve, to the outcomes we deliver.</p>
       </div>
-      <div class="adv-masonry">
-        <!-- Row 1 -->
-        <div class="adv-masonry-card fade-in">
-          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80" alt="Multi-modal diagnostics">
-          <div class="adv-masonry-body">
-            <h4>Multi-Modal Diagnostics</h4>
-            <p>Combining breath biomarkers and blood molecular fingerprinting into a single unified platform. No other company integrates these modalities with longitudinal AI analysis at this scale.</p>
+
+      <div class="why-steps">
+
+        <!-- STEP 1: THE CHALLENGE -->
+        <div class="why-step fade-in">
+          <div class="why-step-number">1</div>
+          <div class="why-step-content">
+            <h3>The Challenge</h3>
+            <div class="why-quote">"I felt fine — but didn't know my body was already heading toward crisis."</div>
+            <p style="color:var(--text-mid);font-size:1.05rem;line-height:1.8;">Most people don't realize they're at risk until it's too late. Annual physicals catch problems after the fact, and symptoms only appear once disease has already progressed. The current system is built to treat — not prevent.</p>
+            <div class="why-stat">→ 80% of chronic diseases are preventable with early detection</div>
           </div>
         </div>
-        <div class="adv-masonry-card fade-in">
-          <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80" alt="Clinical validation">
-          <div class="adv-masonry-body">
-            <h4>Clinical Validation</h4>
-            <p>Partnerships with the world's leading academic medical centers and research institutions. Active VERITY Study. Real clinical evidence backing every claim.</p>
+
+        <!-- STEP 2: THE DIFFERENCE -->
+        <div class="why-step fade-in">
+          <div class="why-step-number">2</div>
+          <div class="why-step-content">
+            <h3>The Person Health Difference</h3>
+            <p style="color:var(--text-mid);font-size:1.05rem;line-height:1.8;margin-bottom:20px;">No other platform combines breath diagnostics, blood molecular fingerprinting, lab infrastructure, and longitudinal AI at this scale.</p>
+            <div style="overflow-x:auto;">
+              <table class="why-table">
+                <thead>
+                  <tr>
+                    <th>Factor</th>
+                    <th>Annual Physical</th>
+                    <th>DTC Kits</th>
+                    <th class="ph-col">Person Health</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Frequency</strong></td>
+                    <td>Once yearly</td>
+                    <td>One-time snapshot</td>
+                    <td class="ph-col">Continuous monitoring</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Biomarkers</strong></td>
+                    <td>10–15 basic</td>
+                    <td>40–60</td>
+                    <td class="ph-col">100+ tracked over time</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Insights</strong></td>
+                    <td>Normal / abnormal flags</td>
+                    <td>General tips</td>
+                    <td class="ph-col">AI-powered trend analysis</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Follow-up</strong></td>
+                    <td>Specialist referral</td>
+                    <td>None</td>
+                    <td class="ph-col">Integrated care pathways</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-        <!-- Row 2 -->
-        <div class="adv-masonry-card fade-in">
-          <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80" alt="IP protection">
-          <div class="adv-masonry-body">
-            <h4>IP Protection</h4>
-            <p>40+ patents filed across breath diagnostics, molecular analysis, and AI/ML algorithms. A defensible moat that deepens with every data point collected.</p>
+
+        <!-- STEP 3: HOW IT WORKS -->
+        <div class="why-step fade-in">
+          <div class="why-step-number">3</div>
+          <div class="why-step-content">
+            <h3>How It Works</h3>
+            <p style="color:var(--text-mid);font-size:1.05rem;line-height:1.8;margin-bottom:20px;">Three integrated steps — from a single breath or blood draw to a personalized care plan, in under a minute.</p>
+            <div class="why-process">
+              <div class="why-process-step">
+                <div class="why-process-icon">🔬</div>
+                <h4>Test</h4>
+                <p>Comprehensive breath and blood diagnostics — 100+ biomarkers, no needles, no lab visits required.</p>
+              </div>
+              <div class="why-process-step">
+                <div class="why-process-icon">🤖</div>
+                <h4>Analyze</h4>
+                <p>AI-powered longitudinal analysis surfaces trends, risks, and early signals invisible to a single data point.</p>
+              </div>
+              <div class="why-process-step">
+                <div class="why-process-icon">👥</div>
+                <h4>Act</h4>
+                <p>Personalized care pathways connect patients and providers with the right interventions at the right time.</p>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="adv-masonry-card fade-in">
-          <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80" alt="Lab infrastructure">
-          <div class="adv-masonry-body">
-            <h4>Lab Infrastructure</h4>
-            <p>Exclusive partnership with Molecular Testing Labs (MTL) — a CLIA/CAP-certified reference lab processing 100K+ tests per month across 70+ assays. Nationwide payor coverage without the capital burden of ownership.</p>
+
+        <!-- STEP 4: REAL OUTCOMES -->
+        <div class="why-step fade-in">
+          <div class="why-step-number">4</div>
+          <div class="why-step-content">
+            <h3>Real Outcomes</h3>
+            <div class="why-outcome">
+              <div class="why-outcome-quote">"Person Health flagged elevated markers 18 months before I would have been diagnosed. I changed my lifestyle — and avoided the diagnosis entirely."</div>
+              <div class="why-outcome-attr">— Michael R., 38, Member since 2023</div>
+              <div class="why-timeline">
+                <div class="why-timeline-point">
+                  <div class="why-timeline-dot">Month<br>1</div>
+                  <div class="why-timeline-label">Baseline established</div>
+                </div>
+                <div class="why-timeline-point">
+                  <div class="why-timeline-dot">Month<br>6</div>
+                  <div class="why-timeline-label">Early risk detected</div>
+                </div>
+                <div class="why-timeline-point">
+                  <div class="why-timeline-dot">Month<br>12</div>
+                  <div class="why-timeline-label">Intervention begins</div>
+                </div>
+                <div class="why-timeline-point">
+                  <div class="why-timeline-dot">Month<br>18</div>
+                  <div class="why-timeline-label">Crisis prevented</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <!-- Spanning full width -->
-        <div class="adv-masonry-card adv-masonry-card--span fade-in">
-          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80" alt="AI data analytics" style="height:200px; object-fit:cover; width:100%;">
-          <div class="adv-masonry-body" style="text-align:center;">
-            <h4>Early Detection Engine</h4>
-            <p>Longitudinal data creates compounding intelligence. The more patients we see, the smarter the platform becomes. This is the flywheel that competitors cannot replicate.</p>
-          </div>
-        </div>
+
       </div>
     </div>
   </section>
