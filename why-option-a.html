@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Person Health — Option A: Editorial Split</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #6237A0;
+      --accent: #9b6ed8;
+      --dark: #28104E;
+      --light-tint: #f5f0fa;
+      --text-mid: #555;
+      --white: #fff;
+    }
+    body { font-family: 'DM Sans', sans-serif; background: #faf9fc; color: #333; }
+
+    .label-bar {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+
+    .section-header {
+      text-align: center;
+      padding: 80px 40px 60px;
+      background: white;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .section-header h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+
+    .section-header p {
+      font-size: 1.15rem;
+      color: var(--text-mid);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* EDITORIAL STEPS */
+    .edit-step {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 520px;
+    }
+
+    .edit-step:nth-child(even) .edit-photo { order: 2; }
+    .edit-step:nth-child(even) .edit-text  { order: 1; }
+
+    .edit-photo {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .edit-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .edit-photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(98,55,160,0.55) 0%, rgba(40,16,78,0.3) 100%);
+    }
+
+    .edit-photo-number {
+      position: absolute;
+      bottom: 32px;
+      left: 36px;
+      font-family: 'Sora', sans-serif;
+      font-size: 7rem;
+      font-weight: 800;
+      color: rgba(255,255,255,0.18);
+      line-height: 1;
+      user-select: none;
+    }
+
+    .edit-step:nth-child(even) .edit-photo-number {
+      left: auto;
+      right: 36px;
+    }
+
+    .edit-photo-label {
+      position: absolute;
+      top: 36px;
+      left: 36px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: white;
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .edit-text {
+      background: white;
+      padding: 64px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-bottom: 1px solid #f0eaf8;
+    }
+
+    .edit-step:nth-child(even) .edit-text {
+      background: var(--light-tint);
+    }
+
+    .edit-step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      border-radius: 50%;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 24px;
+      box-shadow: 0 6px 20px rgba(98,55,160,0.3);
+    }
+
+    .edit-text h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 20px;
+      line-height: 1.25;
+    }
+
+    .edit-quote {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--primary);
+      line-height: 1.7;
+      padding-left: 20px;
+      border-left: 3px solid var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .edit-text p {
+      font-size: 1.05rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .edit-stat {
+      display: inline-block;
+      background: var(--light-tint);
+      border: 1px solid rgba(98,55,160,0.2);
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--primary);
+      margin-top: 8px;
+    }
+
+    /* Comparison table */
+    .edit-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 0.93rem;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(98,55,160,0.1);
+    }
+    .edit-table th {
+      background: var(--primary);
+      color: white;
+      padding: 14px 16px;
+      text-align: left;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.85rem;
+    }
+    .edit-table th.ph { background: var(--accent); }
+    .edit-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #eee;
+      color: #444;
+    }
+    .edit-table tr:last-child td { border-bottom: none; }
+    .edit-table td.ph {
+      background: var(--light-tint);
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* Process cards */
+    .edit-process {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .edit-process-card {
+      background: white;
+      border-radius: 14px;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(98,55,160,0.08);
+    }
+    .edit-process-icon {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin: 0 auto 14px;
+    }
+    .edit-process-card h4 {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .edit-process-card p {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.55;
+    }
+
+    /* Outcome */
+    .edit-outcome-quote {
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--dark);
+      line-height: 1.8;
+      padding-left: 20px;
+      border-left: 4px solid var(--accent);
+      margin-bottom: 12px;
+    }
+    .edit-outcome-attr {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      margin-bottom: 28px;
+    }
+    .edit-timeline {
+      display: flex;
+      gap: 0;
+      position: relative;
+    }
+    .edit-timeline::before {
+      content: '';
+      position: absolute;
+      top: 24px; left: 24px; right: 24px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+    .edit-tl-point {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+    .edit-tl-dot {
+      width: 48px; height: 48px;
+      background: white;
+      border: 3px solid var(--primary);
+      border-radius: 50%;
+      margin: 0 auto 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      color: var(--primary);
+      line-height: 1.2;
+      position: relative;
+      z-index: 1;
+    }
+    .edit-tl-label {
+      font-size: 0.8rem;
+      color: var(--text-mid);
+      line-height: 1.3;
+    }
+
+    @media (max-width: 768px) {
+      .edit-step { grid-template-columns: 1fr; }
+      .edit-photo { min-height: 280px; }
+      .edit-step:nth-child(even) .edit-photo { order: 1; }
+      .edit-step:nth-child(even) .edit-text  { order: 2; }
+      .edit-text { padding: 40px 28px; }
+      .edit-process { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="label-bar">OPTION A — EDITORIAL SPLIT LAYOUT</div>
+
+<div class="section-header">
+  <span class="section-label">Key Advantages</span>
+  <h2>Why Person Health Works</h2>
+  <p>A complete picture — from the challenge we solve, to the outcomes we deliver.</p>
+</div>
+
+<!-- STEP 1 -->
+<div class="edit-step">
+  <div class="edit-photo">
+    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&q=80" alt="Challenge">
+    <div class="edit-photo-overlay"></div>
+    <span class="edit-photo-label">The Challenge</span>
+    <div class="edit-photo-number">01</div>
+  </div>
+  <div class="edit-text">
+    <div class="edit-step-num">1</div>
+    <h3>Most people don't know they're at risk — until it's too late.</h3>
+    <div class="edit-quote">"I felt fine, but didn't know my body was already heading toward crisis."</div>
+    <p>Annual physicals catch problems after the fact. Symptoms only appear once disease has progressed. The current system is built to treat — not prevent.</p>
+    <div class="edit-stat">→ 80% of chronic diseases are preventable with early detection</div>
+  </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="edit-step">
+  <div class="edit-photo">
+    <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=900&q=80" alt="Science">
+    <div class="edit-photo-overlay"></div>
+    <span class="edit-photo-label">The Difference</span>
+    <div class="edit-photo-number">02</div>
+  </div>
+  <div class="edit-text">
+    <div class="edit-step-num">2</div>
+    <h3>The Person Health Difference</h3>
+    <p>No other platform combines breath diagnostics, molecular fingerprinting, lab infrastructure, and longitudinal AI at this scale.</p>
+    <div style="overflow-x:auto;">
+      <table class="edit-table">
+        <thead>
+          <tr><th>Factor</th><th>Annual Physical</th><th>DTC Kits</th><th class="ph">Person Health</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Frequency</strong></td><td>Once yearly</td><td>One-time</td><td class="ph">Continuous</td></tr>
+          <tr><td><strong>Biomarkers</strong></td><td>10–15</td><td>40–60</td><td class="ph">100+ over time</td></tr>
+          <tr><td><strong>Insights</strong></td><td>Flag: normal/abnormal</td><td>General tips</td><td class="ph">AI trend analysis</td></tr>
+          <tr><td><strong>Follow-up</strong></td><td>Specialist referral</td><td>None</td><td class="ph">Integrated care</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 3 -->
+<div class="edit-step">
+  <div class="edit-photo">
+    <img src="https://images.unsplash.com/photo-1581093458791-9f3c3250a8b0?w=900&q=80" alt="Process">
+    <div class="edit-photo-overlay"></div>
+    <span class="edit-photo-label">How It Works</span>
+    <div class="edit-photo-number">03</div>
+  </div>
+  <div class="edit-text">
+    <div class="edit-step-num">3</div>
+    <h3>From breath to clarity — in under a minute.</h3>
+    <p>Three integrated steps: a single breath or blood draw becomes a personalized care plan, powered by AI that gets smarter with every patient.</p>
+    <div class="edit-process">
+      <div class="edit-process-card">
+        <div class="edit-process-icon">🔬</div>
+        <h4>Test</h4>
+        <p>100+ biomarkers. No needles. No lab visits required.</p>
+      </div>
+      <div class="edit-process-card">
+        <div class="edit-process-icon">🤖</div>
+        <h4>Analyze</h4>
+        <p>AI surfaces trends and early signals invisible to a single data point.</p>
+      </div>
+      <div class="edit-process-card">
+        <div class="edit-process-icon">👥</div>
+        <h4>Act</h4>
+        <p>Personalized care pathways — the right intervention at the right time.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 4 -->
+<div class="edit-step">
+  <div class="edit-photo">
+    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=900&q=80" alt="Outcome">
+    <div class="edit-photo-overlay"></div>
+    <span class="edit-photo-label">Real Outcomes</span>
+    <div class="edit-photo-number">04</div>
+  </div>
+  <div class="edit-text">
+    <div class="edit-step-num">4</div>
+    <h3>Prevention that actually changes lives.</h3>
+    <div class="edit-outcome-quote">"Person Health flagged elevated markers 18 months before I would have been diagnosed. I changed my lifestyle — and avoided the diagnosis entirely."</div>
+    <div class="edit-outcome-attr">— Michael R., 38, Member since 2023</div>
+    <div class="edit-timeline">
+      <div class="edit-tl-point">
+        <div class="edit-tl-dot">Mo.<br>1</div>
+        <div class="edit-tl-label">Baseline<br>established</div>
+      </div>
+      <div class="edit-tl-point">
+        <div class="edit-tl-dot">Mo.<br>6</div>
+        <div class="edit-tl-label">Early risk<br>detected</div>
+      </div>
+      <div class="edit-tl-point">
+        <div class="edit-tl-dot">Mo.<br>12</div>
+        <div class="edit-tl-label">Intervention<br>begins</div>
+      </div>
+      <div class="edit-tl-point">
+        <div class="edit-tl-dot">Mo.<br>18</div>
+        <div class="edit-tl-label">Crisis<br>prevented</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

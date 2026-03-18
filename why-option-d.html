@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Person Health — Option D: Gradient Journey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #6237A0;
+      --accent: #9b6ed8;
+      --dark: #28104E;
+      --light-tint: #f5f0fa;
+      --white: #fff;
+    }
+    body { font-family: 'DM Sans', sans-serif; }
+
+    .label-bar {
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+
+    /* Gradient journey wrapper */
+    .journey {
+      background: linear-gradient(
+        180deg,
+        #f5f0fa 0%,
+        #ede4f7 18%,
+        #ddd0f0 35%,
+        #c4aee0 52%,
+        #9b6ed8 68%,
+        #6237A0 82%,
+        #28104E 100%
+      );
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle grain texture overlay */
+    .journey::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    /* Floating geometric accents */
+    .geo-accent {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.06;
+    }
+
+    .section-header {
+      text-align: center;
+      padding: 90px 40px 70px;
+      position: relative;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 20px;
+      background: rgba(255,255,255,0.6);
+      padding: 6px 16px;
+      border-radius: 100px;
+    }
+
+    .section-header h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+
+    .section-header p {
+      font-size: 1.1rem;
+      color: rgba(40,16,78,0.65);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Vertical connector line */
+    .journey-track {
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 40px 100px;
+    }
+
+    .journey-track::before {
+      content: '';
+      position: absolute;
+      left: 40px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg,
+        rgba(98,55,160,0.3) 0%,
+        rgba(155,110,216,0.6) 30%,
+        rgba(255,255,255,0.5) 60%,
+        rgba(255,255,255,0.2) 100%
+      );
+    }
+
+    .grad-step {
+      position: relative;
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 36px;
+      margin-bottom: 64px;
+      align-items: start;
+    }
+
+    .grad-step-indicator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      position: relative;
+    }
+
+    .grad-step-dot {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Sora', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+      transition: transform 0.3s;
+      cursor: default;
+    }
+
+    .grad-step:hover .grad-step-dot { transform: scale(1.08); }
+
+    /* Each step dot gets progressively more saturated */
+    .grad-step:nth-child(1) .grad-step-dot {
+      background: white;
+      color: var(--primary);
+      border: 3px solid rgba(98,55,160,0.3);
+      box-shadow: 0 8px 32px rgba(98,55,160,0.15);
+    }
+    .grad-step:nth-child(2) .grad-step-dot {
+      background: linear-gradient(135deg, #ede4f7, white);
+      color: var(--primary);
+      border: 3px solid rgba(98,55,160,0.4);
+      box-shadow: 0 8px 32px rgba(98,55,160,0.2);
+    }
+    .grad-step:nth-child(3) .grad-step-dot {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      box-shadow: 0 8px 32px rgba(98,55,160,0.4);
+    }
+    .grad-step:nth-child(4) .grad-step-dot {
+      background: linear-gradient(135deg, var(--dark), var(--primary));
+      color: white;
+      box-shadow: 0 8px 40px rgba(40,16,78,0.5);
+    }
+
+    /* Glass card — tint shifts with gradient */
+    .grad-card {
+      border-radius: 24px;
+      padding: 44px 48px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .grad-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .grad-step:nth-child(1) .grad-card {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: 0 8px 40px rgba(98,55,160,0.1);
+      color: var(--dark);
+    }
+    .grad-step:nth-child(2) .grad-card {
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.7);
+      box-shadow: 0 8px 40px rgba(98,55,160,0.15);
+      color: var(--dark);
+    }
+    .grad-step:nth-child(3) .grad-card {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.25);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+      color: white;
+    }
+    .grad-step:nth-child(4) .grad-card {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow: 0 12px 50px rgba(0,0,0,0.35);
+      color: white;
+    }
+
+    .grad-card h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-weight: 800;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .grad-step:nth-child(1) .grad-card h3,
+    .grad-step:nth-child(2) .grad-card h3 { color: var(--dark); }
+
+    .grad-step:nth-child(3) .grad-card h3,
+    .grad-step:nth-child(4) .grad-card h3 { color: white; }
+
+    .grad-step-label {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .grad-step:nth-child(1) .grad-step-label,
+    .grad-step:nth-child(2) .grad-step-label { color: var(--accent); }
+    .grad-step:nth-child(3) .grad-step-label { color: rgba(255,255,255,0.7); }
+    .grad-step:nth-child(4) .grad-step-label { color: rgba(255,255,255,0.6); }
+
+    .grad-quote {
+      font-size: 1.1rem;
+      font-style: italic;
+      line-height: 1.75;
+      padding: 18px 22px;
+      border-radius: 0 12px 12px 0;
+      margin-bottom: 20px;
+    }
+    .grad-step:nth-child(1) .grad-quote,
+    .grad-step:nth-child(2) .grad-quote {
+      border-left: 3px solid var(--accent);
+      background: rgba(98,55,160,0.06);
+      color: var(--dark);
+    }
+    .grad-step:nth-child(3) .grad-quote,
+    .grad-step:nth-child(4) .grad-quote {
+      border-left: 3px solid rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.9);
+    }
+
+    .grad-card p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .grad-step:nth-child(1) .grad-card p,
+    .grad-step:nth-child(2) .grad-card p { color: rgba(40,16,78,0.7); }
+    .grad-step:nth-child(3) .grad-card p,
+    .grad-step:nth-child(4) .grad-card p { color: rgba(255,255,255,0.7); }
+
+    .grad-stat {
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .grad-step:nth-child(1) .grad-stat,
+    .grad-step:nth-child(2) .grad-stat {
+      background: rgba(98,55,160,0.08);
+      border: 1px solid rgba(98,55,160,0.2);
+      color: var(--primary);
+    }
+    .grad-step:nth-child(3) .grad-stat,
+    .grad-step:nth-child(4) .grad-stat {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* Table */
+    .grad-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.9rem; border-radius: 12px; overflow: hidden; }
+    .grad-table th {
+      padding: 14px 16px;
+      text-align: left;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .grad-step:nth-child(2) .grad-table th { background: rgba(98,55,160,0.15); color: var(--primary); }
+    .grad-step:nth-child(2) .grad-table th.ph { background: rgba(98,55,160,0.3); color: var(--primary); }
+    .grad-table td {
+      padding: 13px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .grad-step:nth-child(2) .grad-table td { color: rgba(40,16,78,0.7); border-bottom-color: rgba(98,55,160,0.1); }
+    .grad-step:nth-child(2) .grad-table td.ph { background: rgba(98,55,160,0.08); font-weight: 700; color: var(--primary); }
+    .grad-table tr:last-child td { border-bottom: none; }
+
+    /* Process */
+    .grad-process {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .grad-process-card {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 16px;
+      padding: 24px 18px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+    .grad-process-icon {
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+    }
+    .grad-process-card h4 {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: white;
+      margin-bottom: 8px;
+    }
+    .grad-process-card p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* Timeline */
+    .grad-timeline {
+      display: flex;
+      position: relative;
+      margin-top: 4px;
+    }
+    .grad-timeline::before {
+      content: '';
+      position: absolute;
+      top: 24px; left: 24px; right: 24px;
+      height: 2px;
+      background: rgba(255,255,255,0.25);
+    }
+    .grad-tl-point {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+    .grad-tl-dot {
+      width: 48px; height: 48px;
+      background: rgba(255,255,255,0.12);
+      border: 2px solid rgba(255,255,255,0.5);
+      border-radius: 50%;
+      margin: 0 auto 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 0.65rem;
+      color: white;
+      line-height: 1.2;
+      position: relative;
+      z-index: 1;
+      backdrop-filter: blur(4px);
+    }
+    .grad-tl-label {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.3;
+    }
+
+    @media (max-width: 768px) {
+      .journey-track { padding: 0 20px 80px 20px; }
+      .journey-track::before { left: 20px; }
+      .grad-step { grid-template-columns: 72px 1fr; gap: 20px; }
+      .grad-step-dot { width: 56px; height: 56px; font-size: 1.1rem; }
+      .grad-card { padding: 28px 24px; }
+      .grad-process { grid-template-columns: 1fr; }
+      .grad-timeline { flex-direction: column; gap: 14px; }
+      .grad-timeline::before { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="label-bar">OPTION D — GRADIENT JOURNEY (GLASS-MORPHISM)</div>
+
+<div class="journey">
+  <!-- Floating geo accents -->
+  <div class="geo-accent" style="width:600px;height:600px;background:var(--accent);top:-200px;right:-200px;"></div>
+  <div class="geo-accent" style="width:400px;height:400px;background:white;bottom:200px;left:-150px;"></div>
+
+  <div class="section-header">
+    <span class="section-label">Key Advantages</span>
+    <h2>Why Person Health Works</h2>
+    <p>A complete picture — from the challenge we solve, to the outcomes we deliver.</p>
+  </div>
+
+  <div class="journey-track">
+
+    <!-- STEP 1 -->
+    <div class="grad-step">
+      <div class="grad-step-indicator">
+        <div class="grad-step-dot">1</div>
+      </div>
+      <div class="grad-card">
+        <div class="grad-step-label">The Challenge</div>
+        <h3>Most people don't know they're at risk — until it's too late.</h3>
+        <div class="grad-quote">"I felt fine, but didn't know my body was already heading toward crisis."</div>
+        <p>Annual physicals catch problems after the fact. Symptoms only appear once disease has already progressed. The current system is built to treat — not prevent.</p>
+        <div class="grad-stat">→ 80% of chronic diseases are preventable with early detection</div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="grad-step">
+      <div class="grad-step-indicator">
+        <div class="grad-step-dot">2</div>
+      </div>
+      <div class="grad-card">
+        <div class="grad-step-label">The Difference</div>
+        <h3>The Person Health Difference</h3>
+        <p>No other platform combines breath diagnostics, molecular fingerprinting, lab infrastructure, and longitudinal AI at this scale.</p>
+        <div style="overflow-x:auto;">
+          <table class="grad-table">
+            <thead>
+              <tr><th>Factor</th><th>Annual Physical</th><th>DTC Kits</th><th class="ph">Person Health</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Frequency</strong></td><td>Once yearly</td><td>One-time</td><td class="ph">Continuous</td></tr>
+              <tr><td><strong>Biomarkers</strong></td><td>10–15</td><td>40–60</td><td class="ph">100+ over time</td></tr>
+              <tr><td><strong>Insights</strong></td><td>Normal/abnormal</td><td>General tips</td><td class="ph">AI trend analysis</td></tr>
+              <tr><td><strong>Follow-up</strong></td><td>Specialist referral</td><td>None</td><td class="ph">Integrated care</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="grad-step">
+      <div class="grad-step-indicator">
+        <div class="grad-step-dot">3</div>
+      </div>
+      <div class="grad-card">
+        <div class="grad-step-label">How It Works</div>
+        <h3>From breath to clarity — in under a minute.</h3>
+        <p>Three integrated steps: a single breath or blood draw becomes a personalized care plan, powered by AI that gets smarter with every patient.</p>
+        <div class="grad-process">
+          <div class="grad-process-card">
+            <div class="grad-process-icon">🔬</div>
+            <h4>Test</h4>
+            <p>100+ biomarkers. No needles. No lab visits required.</p>
+          </div>
+          <div class="grad-process-card">
+            <div class="grad-process-icon">🤖</div>
+            <h4>Analyze</h4>
+            <p>AI surfaces trends invisible to a single data point.</p>
+          </div>
+          <div class="grad-process-card">
+            <div class="grad-process-icon">👥</div>
+            <h4>Act</h4>
+            <p>Right intervention, right care, right time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="grad-step">
+      <div class="grad-step-indicator">
+        <div class="grad-step-dot">4</div>
+      </div>
+      <div class="grad-card">
+        <div class="grad-step-label">Real Outcomes</div>
+        <h3>Prevention that actually changes lives.</h3>
+        <div class="grad-quote">"Person Health flagged elevated markers 18 months before I would have been diagnosed. I changed my lifestyle — and avoided the diagnosis entirely."</div>
+        <p style="font-size:0.88rem;margin-bottom:28px;">— Michael R., 38, Member since 2023</p>
+        <div class="grad-timeline">
+          <div class="grad-tl-point">
+            <div class="grad-tl-dot">Mo.<br>1</div>
+            <div class="grad-tl-label">Baseline<br>established</div>
+          </div>
+          <div class="grad-tl-point">
+            <div class="grad-tl-dot">Mo.<br>6</div>
+            <div class="grad-tl-label">Early risk<br>detected</div>
+          </div>
+          <div class="grad-tl-point">
+            <div class="grad-tl-dot">Mo.<br>12</div>
+            <div class="grad-tl-label">Intervention<br>begins</div>
+          </div>
+          <div class="grad-tl-point">
+            <div class="grad-tl-dot">Mo.<br>18</div>
+            <div class="grad-tl-label">Crisis<br>prevented</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
