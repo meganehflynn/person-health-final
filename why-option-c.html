@@ -133,8 +133,9 @@
     .banner-content {
       position: relative;
       z-index: 1;
-      max-width: 660px;
-      padding: 80px 7%;
+      max-width: 820px;
+      width: 65%;
+      padding: 80px 6%;
     }
 
     /* Alternate text side */
@@ -208,28 +209,31 @@
     .banner-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.97rem;
+      font-size: 0.92rem;
       border-radius: 14px;
       overflow: hidden;
       margin-top: 8px;
+      table-layout: fixed;
     }
     .banner-table th {
       background: rgba(98,55,160,0.55);
       color: white;
-      padding: 15px 18px;
+      padding: 13px 14px;
       text-align: left;
       font-family: 'Sora', sans-serif;
-      font-size: 0.88rem;
+      font-size: 0.82rem;
       font-weight: 700;
       backdrop-filter: blur(8px);
+      word-break: keep-all;
     }
     .banner-table th.ph { background: rgba(155,110,216,0.65); }
     .banner-table td {
-      padding: 14px 18px;
+      padding: 13px 14px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       color: rgba(255,255,255,0.78);
       background: rgba(255,255,255,0.06);
       backdrop-filter: blur(6px);
+      vertical-align: middle;
     }
     .banner-table tr:last-child td { border-bottom: none; }
     .banner-table td.ph {
@@ -374,8 +378,7 @@
     <div class="banner-num">02 — The Difference</div>
     <h3>The Person Health Difference</h3>
     <p>No other platform combines breath diagnostics, molecular fingerprinting, lab infrastructure, and longitudinal AI at this scale.</p>
-    <div style="overflow-x:auto;">
-      <table class="banner-table">
+    <table class="banner-table">
         <thead>
           <tr><th>Factor</th><th>Annual Physical</th><th>DTC Kits</th><th class="ph">Person Health</th></tr>
         </thead>
