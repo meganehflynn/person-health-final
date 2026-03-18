@@ -14,7 +14,7 @@
       --white: #fff;
       --light-tint: #f5f0fa;
     }
-    body { font-family: 'DM Sans', sans-serif; background: #0a0614; color: white; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--dark); color: white; }
 
     .label-bar {
       background: var(--primary);
@@ -27,16 +27,16 @@
       letter-spacing: 0.08em;
     }
 
-    /* HERO INTRO */
+    /* INTRO */
     .section-intro {
-      background: #0a0614;
+      background: var(--dark);
       text-align: center;
-      padding: 90px 40px 60px;
+      padding: 90px 40px 70px;
     }
     .section-label {
       display: inline-block;
       font-family: 'Sora', sans-serif;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-weight: 700;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -45,15 +45,16 @@
     }
     .section-intro h2 {
       font-family: 'Sora', sans-serif;
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-size: clamp(2.4rem, 5vw, 4rem);
       font-weight: 800;
       color: white;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
+      line-height: 1.1;
     }
     .section-intro p {
-      font-size: 1.1rem;
-      color: rgba(255,255,255,0.55);
-      max-width: 500px;
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.6);
+      max-width: 540px;
       margin: 0 auto;
       line-height: 1.7;
     }
@@ -61,7 +62,7 @@
     /* FULL-BLEED BANNER */
     .banner {
       position: relative;
-      min-height: 600px;
+      min-height: 680px;
       display: flex;
       align-items: center;
       overflow: hidden;
@@ -72,124 +73,163 @@
       inset: 0;
       background-size: cover;
       background-position: center;
-      transform: scale(1.02);
-      transition: transform 8s ease;
+      transition: transform 10s ease;
     }
 
     .banner:hover .banner-bg {
-      transform: scale(1.06);
+      transform: scale(1.04);
     }
 
-    .banner-overlay {
+    /* Overlays — applied selectively per step */
+    /* Step 1 (lifestyle): left-to-right dark-to-clear so image breathes on right */
+    .banner-overlay-s1 {
       position: absolute;
       inset: 0;
+      background: linear-gradient(100deg,
+        rgba(40,16,78,0.93) 0%,
+        rgba(40,16,78,0.82) 38%,
+        rgba(40,16,78,0.45) 65%,
+        rgba(40,16,78,0.1) 100%
+      );
     }
 
-    /* Each step gets a unique gradient direction for variety */
-    .banner:nth-child(2) .banner-overlay  { background: linear-gradient(105deg, rgba(40,16,78,0.92) 0%, rgba(40,16,78,0.75) 45%, rgba(40,16,78,0.2) 100%); }
-    .banner:nth-child(3) .banner-overlay  { background: linear-gradient(255deg, rgba(40,16,78,0.92) 0%, rgba(40,16,78,0.75) 45%, rgba(40,16,78,0.2) 100%); }
-    .banner:nth-child(4) .banner-overlay  { background: linear-gradient(105deg, rgba(98,55,160,0.92) 0%, rgba(40,16,78,0.8) 50%, rgba(40,16,78,0.2) 100%); }
-    .banner:nth-child(5) .banner-overlay  { background: linear-gradient(255deg, rgba(40,16,78,0.88) 0%, rgba(98,55,160,0.75) 45%, rgba(40,16,78,0.15) 100%); }
+    /* Step 2 (breath device — lighter overlay, image has bright background) */
+    .banner-overlay-s2 {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(260deg,
+        rgba(40,16,78,0.93) 0%,
+        rgba(40,16,78,0.82) 38%,
+        rgba(40,16,78,0.40) 65%,
+        rgba(40,16,78,0.05) 100%
+      );
+    }
 
+    /* Step 3 (process): left-side dark for text */
+    .banner-overlay-s3 {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(100deg,
+        rgba(40,16,78,0.92) 0%,
+        rgba(40,16,78,0.78) 42%,
+        rgba(40,16,78,0.35) 68%,
+        rgba(40,16,78,0.05) 100%
+      );
+    }
+
+    /* Step 4 (cancer cell — already dark image, very light overlay) */
+    .banner-overlay-s4 {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(260deg,
+        rgba(40,16,78,0.88) 0%,
+        rgba(40,16,78,0.70) 40%,
+        rgba(40,16,78,0.2) 70%,
+        rgba(40,16,78,0.0) 100%
+      );
+    }
+
+    /* CONTENT */
     .banner-content {
       position: relative;
       z-index: 1;
-      max-width: 680px;
-      padding: 80px 8%;
+      max-width: 660px;
+      padding: 80px 7%;
     }
 
     /* Alternate text side */
-    .banner:nth-child(odd) .banner-content  { margin-left: 0; margin-right: auto; }
-    .banner:nth-child(even) .banner-content { margin-left: auto; margin-right: 0; }
+    .banner-left  .banner-content { margin-left: 0; margin-right: auto; }
+    .banner-right .banner-content { margin-left: auto; margin-right: 0; }
 
     .banner-num {
       font-family: 'Sora', sans-serif;
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       font-weight: 700;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
-
     .banner-num::after {
       content: '';
       display: block;
-      width: 40px;
+      width: 44px;
       height: 2px;
       background: var(--accent);
+      opacity: 0.7;
     }
 
     .banner-content h3 {
       font-family: 'Sora', sans-serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-size: clamp(2rem, 3.8vw, 2.8rem);
       font-weight: 800;
       color: white;
       line-height: 1.15;
-      margin-bottom: 24px;
+      margin-bottom: 26px;
     }
 
     .banner-quote {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-style: italic;
-      color: rgba(255,255,255,0.85);
+      color: rgba(255,255,255,0.88);
       line-height: 1.75;
-      padding: 20px 24px;
-      border-left: 3px solid var(--accent);
-      background: rgba(255,255,255,0.07);
-      backdrop-filter: blur(4px);
-      border-radius: 0 12px 12px 0;
-      margin-bottom: 24px;
+      padding: 22px 26px;
+      border-left: 4px solid var(--accent);
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(6px);
+      border-radius: 0 14px 14px 0;
+      margin-bottom: 26px;
     }
 
     .banner-content p {
-      font-size: 1.05rem;
-      color: rgba(255,255,255,0.75);
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.8);
       line-height: 1.8;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     .banner-stat {
       display: inline-block;
-      background: rgba(155,110,216,0.2);
-      border: 1px solid rgba(155,110,216,0.4);
-      backdrop-filter: blur(8px);
-      padding: 14px 24px;
-      border-radius: 10px;
+      background: rgba(155,110,216,0.22);
+      border: 1px solid rgba(155,110,216,0.45);
+      backdrop-filter: blur(10px);
+      padding: 16px 26px;
+      border-radius: 12px;
       font-family: 'Sora', sans-serif;
       font-weight: 700;
-      font-size: 1rem;
-      color: var(--accent);
+      font-size: 1.05rem;
+      color: #c4a0f0;
     }
 
-    /* Table inside banner */
+    /* Comparison table */
     .banner-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.88rem;
-      border-radius: 12px;
+      font-size: 0.97rem;
+      border-radius: 14px;
       overflow: hidden;
-      margin-top: 4px;
-      backdrop-filter: blur(8px);
+      margin-top: 8px;
     }
     .banner-table th {
-      background: rgba(98,55,160,0.6);
+      background: rgba(98,55,160,0.55);
       color: white;
-      padding: 13px 16px;
+      padding: 15px 18px;
       text-align: left;
       font-family: 'Sora', sans-serif;
-      font-size: 0.82rem;
+      font-size: 0.88rem;
       font-weight: 700;
+      backdrop-filter: blur(8px);
     }
-    .banner-table th.ph { background: rgba(155,110,216,0.7); }
+    .banner-table th.ph { background: rgba(155,110,216,0.65); }
     .banner-table td {
-      padding: 13px 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      color: rgba(255,255,255,0.75);
-      background: rgba(255,255,255,0.05);
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.78);
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(6px);
     }
     .banner-table tr:last-child td { border-bottom: none; }
     .banner-table td.ph {
@@ -198,68 +238,67 @@
       color: #c4a0f0;
     }
 
-    /* Process */
+    /* Process cards */
     .banner-process {
       display: grid;
       grid-template-columns: repeat(3,1fr);
       gap: 16px;
-      margin-top: 4px;
+      margin-top: 8px;
     }
     .banner-process-card {
-      background: rgba(255,255,255,0.07);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 14px;
-      padding: 24px 18px;
+      background: rgba(255,255,255,0.09);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px;
+      padding: 26px 20px;
       text-align: center;
     }
     .banner-process-icon {
-      font-size: 1.6rem;
-      margin-bottom: 12px;
+      font-size: 1.8rem;
+      margin-bottom: 14px;
     }
     .banner-process-card h4 {
       font-family: 'Sora', sans-serif;
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       color: white;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
     .banner-process-card p {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.6);
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.65);
       line-height: 1.55;
       margin: 0;
     }
 
     /* Outcome / Timeline */
     .banner-outcome-quote {
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       font-style: italic;
-      color: rgba(255,255,255,0.9);
+      color: rgba(255,255,255,0.92);
       line-height: 1.8;
-      padding: 20px 24px;
-      border-left: 3px solid var(--accent);
-      background: rgba(255,255,255,0.07);
-      backdrop-filter: blur(4px);
-      border-radius: 0 12px 12px 0;
-      margin-bottom: 8px;
+      padding: 22px 26px;
+      border-left: 4px solid var(--accent);
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(6px);
+      border-radius: 0 14px 14px 0;
+      margin-bottom: 10px;
     }
     .banner-outcome-attr {
-      font-size: 0.88rem;
+      font-size: 0.92rem;
       color: rgba(255,255,255,0.5);
-      margin-bottom: 28px;
+      margin-bottom: 30px;
     }
     .banner-timeline {
       display: flex;
-      gap: 0;
       position: relative;
     }
     .banner-timeline::before {
       content: '';
       position: absolute;
-      top: 24px; left: 24px; right: 24px;
+      top: 26px; left: 26px; right: 26px;
       height: 2px;
-      background: linear-gradient(90deg, var(--accent), rgba(155,110,216,0.3));
+      background: linear-gradient(90deg, var(--accent), rgba(155,110,216,0.25));
     }
     .banner-tl-point {
       flex: 1;
@@ -267,31 +306,36 @@
       position: relative;
     }
     .banner-tl-dot {
-      width: 48px; height: 48px;
+      width: 52px; height: 52px;
       background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(8px);
-      border: 2px solid var(--accent);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(155,110,216,0.7);
       border-radius: 50%;
-      margin: 0 auto 10px;
+      margin: 0 auto 12px;
       display: flex; align-items: center; justify-content: center;
       font-family: 'Sora', sans-serif;
       font-weight: 700;
-      font-size: 0.65rem;
-      color: var(--accent);
+      font-size: 0.68rem;
+      color: #c4a0f0;
       line-height: 1.2;
       position: relative;
       z-index: 1;
     }
     .banner-tl-label {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.3;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.35;
     }
 
     @media (max-width: 768px) {
       .banner { min-height: auto; }
-      .banner-content { padding: 60px 24px; }
-      .banner:nth-child(even) .banner-content { margin-left: 0; }
+      .banner-content { padding: 60px 24px; max-width: 100%; }
+      .banner-left .banner-content,
+      .banner-right .banner-content { margin: 0; }
+      .banner-overlay-s1, .banner-overlay-s2,
+      .banner-overlay-s3, .banner-overlay-s4 {
+        background: rgba(40,16,78,0.88);
+      }
       .banner-process { grid-template-columns: 1fr; }
       .banner-timeline { flex-direction: column; gap: 14px; }
       .banner-timeline::before { display: none; }
@@ -300,7 +344,7 @@
 </head>
 <body>
 
-<div class="label-bar">OPTION C — FULL-BLEED PHOTO BANNERS</div>
+<div class="label-bar">OPTION C — FULL-BLEED PHOTO BANNERS (UPDATED)</div>
 
 <div class="section-intro">
   <span class="section-label">Key Advantages</span>
@@ -308,10 +352,10 @@
   <p>A complete picture — from the challenge we solve, to the outcomes we deliver.</p>
 </div>
 
-<!-- STEP 1 -->
-<div class="banner">
-  <div class="banner-bg" style="background-image:url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1800&q=80');"></div>
-  <div class="banner-overlay"></div>
+<!-- STEP 1: THE CHALLENGE — lifestyle family photo, text left -->
+<div class="banner banner-left">
+  <div class="banner-bg" style="background-image:url('https://images.unsplash.com/photo-1511895426328-dc8714191011?w=1920&q=85'); background-position: center right;"></div>
+  <div class="banner-overlay-s1"></div>
   <div class="banner-content">
     <div class="banner-num">01 — The Challenge</div>
     <h3>Most people don't know they're at risk — until it's too late.</h3>
@@ -321,10 +365,11 @@
   </div>
 </div>
 
-<!-- STEP 2 -->
-<div class="banner">
-  <div class="banner-bg" style="background-image:url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1800&q=80');"></div>
-  <div class="banner-overlay"></div>
+<!-- STEP 2: THE DIFFERENCE — VocxiHealth breath device image, text right -->
+<!-- SWAP image src below with the VocxiHealth breath device photo filename once added to folder -->
+<div class="banner banner-right">
+  <div class="banner-bg" style="background-image:url('https://vocxihealth.com/wp-content/uploads/VOC_Website_PatientPhoto_4.jpg'); background-position: center left;"></div>
+  <div class="banner-overlay-s2"></div>
   <div class="banner-content">
     <div class="banner-num">02 — The Difference</div>
     <h3>The Person Health Difference</h3>
@@ -345,10 +390,10 @@
   </div>
 </div>
 
-<!-- STEP 3 -->
-<div class="banner">
-  <div class="banner-bg" style="background-image:url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1800&q=80');"></div>
-  <div class="banner-overlay"></div>
+<!-- STEP 3: HOW IT WORKS — process/clinical photo, text left -->
+<div class="banner banner-left">
+  <div class="banner-bg" style="background-image:url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&q=85'); background-position: center right;"></div>
+  <div class="banner-overlay-s3"></div>
   <div class="banner-content">
     <div class="banner-num">03 — How It Works</div>
     <h3>From breath to clarity — in under a minute.</h3>
@@ -373,10 +418,11 @@
   </div>
 </div>
 
-<!-- STEP 4 -->
-<div class="banner">
-  <div class="banner-bg" style="background-image:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1800&q=80');"></div>
-  <div class="banner-overlay"></div>
+<!-- STEP 4: REAL OUTCOMES — cancer cell targeting image, text right -->
+<!-- SWAP image src below with the cancer cell filename once added to folder -->
+<div class="banner banner-right">
+  <div class="banner-bg" style="background-image:url('https://images.unsplash.com/photo-1614935151651-0bea6508db6b?w=1920&q=85'); background-position: center left;"></div>
+  <div class="banner-overlay-s4"></div>
   <div class="banner-content">
     <div class="banner-num">04 — Real Outcomes</div>
     <h3>Prevention that actually changes lives.</h3>
