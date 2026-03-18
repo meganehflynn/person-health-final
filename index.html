@@ -2606,21 +2606,36 @@
         btn.innerHTML = 'Submitting...';
         btn.disabled = true;
 
-        setTimeout(function() {
-          btn.innerHTML = 'Inquiry Submitted Successfully';
-          btn.style.background = '#6237A0';
+        var data = new FormData(contactForm);
 
-          setTimeout(function() {
-            btn.innerHTML = originalHTML;
+        fetch('https://formspree.io/f/mnjglzev', {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        }).then(function(response) {
+          if (response.ok) {
+            btn.innerHTML = 'Inquiry Submitted Successfully';
+            btn.style.background = '#6237A0';
+            setTimeout(function() {
+              btn.innerHTML = originalHTML;
+              btn.disabled = false;
+              btn.style.background = '';
+              contactForm.reset();
+              for (var c = 0; c < audienceBtns.length; c++) {
+                audienceBtns[c].classList.remove('active');
+              }
+              audienceBtns[0].classList.add('active');
+            }, 3000);
+          } else {
+            btn.innerHTML = 'Something went wrong — please try again';
             btn.disabled = false;
-            btn.style.background = '';
-            contactForm.reset();
-            for (var c = 0; c < audienceBtns.length; c++) {
-              audienceBtns[c].classList.remove('active');
-            }
-            audienceBtns[0].classList.add('active');
-          }, 3000);
-        }, 1500);
+            setTimeout(function() { btn.innerHTML = originalHTML; }, 3000);
+          }
+        }).catch(function() {
+          btn.innerHTML = 'Something went wrong — please try again';
+          btn.disabled = false;
+          setTimeout(function() { btn.innerHTML = originalHTML; }, 3000);
+        });
       });
 
       /* ========================================
